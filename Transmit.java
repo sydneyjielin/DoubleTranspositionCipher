@@ -24,6 +24,10 @@ public class Transmit implements Cipher {
 			tempMess = tempMess.replace(tempMess.substring(0, k.length()), "");
 		}
 		
+		String array = "";
+		for (String word : words)
+			array += word + " ";
+		
 		String[] columns = new String[k.length()];
 		for (int i = 0; i < columns.length; i++) {
 			for (int n = 1; n < words.length; n++) {
@@ -32,31 +36,45 @@ public class Transmit implements Cipher {
 			}
 		}
 		
+		String columnArray = "";
+		for (String col : columns)
+			columnArray += col + " ";
+		
 		int[] values = new int[k.length()];
 		
 		for (int i = 0; i < values.length; i++)
 			values[i] = alphabet.indexOf(k.substring(i, i + 1));
 		
-		String temp = "";
-		
-		
-		String array = "";
-		for (String word : words)
-			array += word + " ";
-		
-		String columnArray = "";
-		for (String col : columns)
-			columnArray += col + " ";
-		
 		String valArray = "";
 		for (int val : values)
 			valArray += val + " ";
+		
+		String temp = "";
+		int tempInt = 0;
+//		for (int i = 0; i < columns.length; i++) {
+//			for (int n = i + 1; n < values.length - 1; n++) {
+//				if (values[i] > values[n]) {
+//					temp = columns[n];
+//					columns[n] = columns[i];
+//					columns[i] = temp;
+//					
+//					tempInt = values[n];
+//					values[n] = values[i];
+//					values[i] = tempInt;
+//				}
+//			}
+//		}
+		
+		String valArrayTwo = "";
+		for (int val : values)
+			valArrayTwo += val + " ";
 		
 		return message + 
 				"\nlines = " + lines + 
 				"\narray = " + array + 
 				"\ncolumns = " + columnArray + 
-				"\nvalues = " + valArray;
+				"\nvalues = " + valArray +
+				"\nvalues after = " + valArrayTwo;
 	}
 
 	@Override
