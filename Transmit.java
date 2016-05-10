@@ -51,19 +51,23 @@ public class Transmit implements Cipher {
 		
 		String temp = "";
 		int tempInt = 0;
-//		for (int i = 0; i < columns.length; i++) {
-//			for (int n = i + 1; n < values.length - 1; n++) {
-//				if (values[i] > values[n]) {
-//					temp = columns[n];
-//					columns[n] = columns[i];
-//					columns[i] = temp;
-//					
-//					tempInt = values[n];
-//					values[n] = values[i];
-//					values[i] = tempInt;
-//				}
-//			}
-//		}
+		for (int i = 0; i < columns.length; i++) {
+			for (int n = i + 1; n < values.length; n++) {
+				if (values[i] > values[n]) {
+					temp = columns[n];
+					columns[n] = columns[i];
+					columns[i] = temp;
+					
+					tempInt = values[n];
+					values[n] = values[i];
+					values[i] = tempInt;
+				}
+			}
+		}
+		
+		String columnArrayTwo = "";
+		for (String col : columns)
+			columnArrayTwo += col + " ";
 		
 		String valArrayTwo = "";
 		for (int val : values)
@@ -74,6 +78,7 @@ public class Transmit implements Cipher {
 				"\narray = " + array + 
 				"\ncolumns = " + columnArray + 
 				"\nvalues = " + valArray +
+				"\ncolumns after = " + columnArrayTwo +
 				"\nvalues after = " + valArrayTwo;
 	}
 
