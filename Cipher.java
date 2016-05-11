@@ -5,5 +5,5 @@ public interface Cipher {
 	public final String alphabet = "abcdefghijklmnopqrstuvwxyz";
 	
 	public String encrypt(String m, String k, String w, String p);
-	public String decode(String m, String k, String w, String p);
+	public String decode(String m, String k, String w);
 }
