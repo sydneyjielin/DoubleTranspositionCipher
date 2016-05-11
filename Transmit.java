@@ -166,19 +166,19 @@ public class Transmit implements Cipher {
 			encrypt2 += col;
 		
 		return message +
-				"\nlines = " + lines + 
-				"\narray = " + array + 
-				"\ncolumns = " + columnArray + 
-				"\nvalues = " + valArray +
-				"\ncolumns after = " + columnArrayTwo +
-				"\nvalues after = " + valArrayTwo +
-				"\ntransposition one = " + encrypt1 +
-				"\nlines two = " + lines2 + 
-				"\narray two = " + array2 + 
-				"\ncolumns two = " + columnArray2 + 
-				"\nvalues two = " + valArray2 +
-				"\ncolumns two after = " + columnArrayTwo2 +
-				"\nvalues two after = " + valArrayTwo2 +
+//				"\nlines = " + lines + 
+//				"\narray = " + array + 
+//				"\ncolumns = " + columnArray + 
+//				"\nvalues = " + valArray +
+//				"\ncolumns after = " + columnArrayTwo +
+//				"\nvalues after = " + valArrayTwo +
+//				"\ntransposition one = " + encrypt1 +
+//				"\nlines two = " + lines2 + 
+//				"\narray two = " + array2 + 
+//				"\ncolumns two = " + columnArray2 + 
+//				"\nvalues two = " + valArray2 +
+//				"\ncolumns two after = " + columnArrayTwo2 +
+//				"\nvalues two after = " + valArrayTwo2 +
 //				"\ntransposition two = " + 
 				"\nencrypted = " + encrypt2;
 	}
@@ -188,88 +188,66 @@ public class Transmit implements Cipher {
 		double lineCount = k.length();
 		String message = "";
 		String[] words;
+		int[] values = new int[k.length()];
+		
+		k = k.toLowerCase();
+		w = w.toLowerCase();
+		message = m;
 		
 		if (m.contains(" ")) {
 			message = m.replace(" ", "");
 		}
 		
-		message = message.toLowerCase();		
+		message = message.toLowerCase();	
 		lineCount = message.length() / lineCount;
 		lineCount = Math.ceil(lineCount);
 		
 		int lines = (int)lineCount;
 		words = new String[lines];
 		
-//		String tempMess = message;
-//
-//		for (int i = 0; i < lines; i++) {
-//			words[i] = tempMess.substring(0, k.length());
-//			tempMess = tempMess.replace(tempMess.substring(0, k.length()), "");
-//		}
-//		
-//		String array = "";
-//		for (String word : words)
-//			array += word + " ";
-//		
-//		String[] columns = new String[k.length()];
-//		for (int i = 0; i < columns.length; i++) {
-//			columns[i] = words[0].substring(i, i + 1);
-//			
-//			for (int n = 1; n < words.length; n++) {
-//				columns[i] += words[n].substring(i, i + 1);
-//			}
-//		}
-//		
-//		String columnArray = "";
-//		for (String col : columns)
-//			columnArray += col + " ";
-//		
-//		int[] values = new int[k.length()];
-//		
-//		for (int i = 0; i < values.length; i++)
-//			values[i] = alphabet.indexOf(k.substring(i, i + 1));
-//		
-//		String valArray = "";
-//		for (int val : values)
-//			valArray += val + " ";
-//		
-//		String temp = "";
-//		int tempInt = 0;
-//		for (int i = 0; i < columns.length; i++) {
-//			for (int n = i + 1; n < values.length; n++) {
-//				if (values[i] > values[n]) {
-//					temp = columns[n];
-//					columns[n] = columns[i];
-//					columns[i] = temp;
-//					
-//					tempInt = values[n];
-//					values[n] = values[i];
-//					values[i] = tempInt;
-//				}
-//			}
-//		}
-//		
-//		String columnArrayTwo = "";
-//		for (String col : columns)
-//			columnArrayTwo += col + " ";
-//		
-//		String valArrayTwo = "";
-//		for (int val : values)
-//			valArrayTwo += val + " ";
-//		
-//		String encrypt1 = "";
-//		for (String col : columns)
-//			encrypt1 += col;
+		for (int i = 0; i < values.length; i++)
+			values[i] = alphabet.indexOf(k.substring(i, i + 1));
+		
+		String valuesArray = "";
+		for (int val : values) 
+			valuesArray += val + " ";
+		
+		String[] columns = new String[k.length()];
+		int lowest = 0;
+		String tempMess = message;
+		
+		for (int i = 0; i < columns.length; i++) {
+			for (int n = 0; n < values.length; n++) {
+				if (values[n] < values[lowest])
+					lowest = n;
+			}
+			
+			values[lowest] = 27;
+			columns[lowest] = tempMess.substring(0, lines);
+			tempMess = tempMess.replace(tempMess.substring(0, lines), "");
+		}
+		
+		String columnsArray = "";
+		for (String col : columns)
+			columnsArray += col + " ";
+		
+		String decode1 = "";
+		for (int i = 0; i < columns.length; i++) {
+			for (int n = 0; n < columns[i].length(); n++) {
+				decode1 += columns[i].substring(n, n + 1);
+			}
+		}
+		
 		return message +
-				"\nlines = " + lines;
+				"\nlines = " + lines + 
+				"\nvalues = " + valuesArray +
+				"\ncolumns = " + columnsArray + 
+				"\ndecoded one = " + decode1;
 	}
 
 	public static void main(String argv[]) {
 		Transmit t = new Transmit();
 //		System.out.println(t.encrypt("hello world", "five", "to", "x"));
-		System.out.println(t.encrypt("Y O U R M O T H E R W A S A H A M S T E R A N D Y O U R F A T H E R S M E L T O F E L D E R B E R R I E S", "DESCRIBE", "COASTLINE", "X"));
-		
-		Transmit n = new Transmit();
-		System.out.println(n.decode("lrxholewdlox", "five", "to"));
+		System.out.println(t.decode("rhlwlxlxoedo", "five", "to"));
 	}
 }
