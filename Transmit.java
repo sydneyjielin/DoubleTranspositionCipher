@@ -172,7 +172,7 @@ public class Transmit implements Cipher {
 //				"\nvalues = " + valArray +
 //				"\ncolumns after = " + columnArrayTwo +
 //				"\nvalues after = " + valArrayTwo +
-//				"\ntransposition one = " + encrypt1 +
+				"\ntransposition one = " + encrypt1 +
 //				"\nlines two = " + lines2 + 
 //				"\narray two = " + array2 + 
 //				"\ncolumns two = " + columnArray2 + 
@@ -231,6 +231,10 @@ public class Transmit implements Cipher {
 		for (String col : columns)
 			columnsArray += col + " ";
 		
+		String valuesArrayTwo = "";
+		for (int val : values) 
+			valuesArrayTwo += val + " ";
+		
 		String decode1 = "";
 		for (int i = 0; i < columns.length; i++) {
 			for (int n = 0; n < columns[i].length(); n++) {
@@ -242,6 +246,7 @@ public class Transmit implements Cipher {
 				"\nlines = " + lines + 
 				"\nvalues = " + valuesArray +
 				"\ncolumns = " + columnsArray + 
+				"\nvalues after = " + valuesArrayTwo + 
 				"\ndecoded one = " + decode1;
 	}
 
