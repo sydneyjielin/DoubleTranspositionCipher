@@ -62,8 +62,8 @@ public class Receive implements Cipher {
 		
 		String tempMess = m;
 		int low = 0;
-		for (int i = 0; i < grid.length; i++) {
-			for (int n = 0; n < grid[i].length; n++) {
+		for (int i = 0; i < values.length; i++) {
+			for (int n = 0; n < values.length; n++) {
 				if (values[n] < values[low])
 					low = n;
 			}
@@ -73,6 +73,7 @@ public class Receive implements Cipher {
 					grid[n][low] = tempMess.substring(0, 1);
 					tempMess = tempMess.substring(1, tempMess.length());
 				}
+				
 				values[low] = 27;
 			}
 		}
@@ -125,7 +126,7 @@ public class Receive implements Cipher {
 		
 		String tempMess2 = decoded1;
 		int low2 = 0;
-		for (int i = 0; i < grid2.length; i++) {
+		for (int i = 0; i < values2.length; i++) {
 			for (int n = 0; n < values2.length; n++) {
 				if (values2[n] < values2[low2])
 					low2 = n;
@@ -175,13 +176,13 @@ public class Receive implements Cipher {
 		}
 		
 		return message + 
-//				w +
-//				"\n" + g +
+				"\n" + w +
+				"\n" + g +
 				"\ndecoded once = " + decoded1 +
 //				"\n" + values2Array +
 //				"\n" + g2 +
-//				"\n" + k +
-//				"\n" + g2 +
+				"\n" + k +
+				"\n" + g2 +
 //				"\ndecoded two = " + 
 				"\ndecoded = " + decoded2;
 	}
@@ -191,7 +192,10 @@ public class Receive implements Cipher {
 	}
 	
 	public static void main(String argv[]) {
-		Receive m = new Receive ("xcsmmioxlwxaeehaiesx", "hello", "three", "x");
-		System.out.println(m.decode());
+//		Receive m = new Receive("xcsmmioxlwxaeehaiesx", "hello", "three", "x");
+//		System.out.println(m.decode());
+		
+		Receive t = new Receive("arrtestsitem", "tetris", "master", "x");
+		System.out.println(t.decode());
 	}
 }
