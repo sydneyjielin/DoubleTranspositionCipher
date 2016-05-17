@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Receive implements Cipher {
 	private String message;
 	private String keywordOne;
@@ -175,16 +177,18 @@ public class Receive implements Cipher {
 				decoded2 = decoded2.substring(0, decoded2.length() - 1);
 		}
 		
-		return message + 
-				"\n" + w +
-				"\n" + g +
-				"\ndecoded once = " + decoded1 +
+		return 
+//				message + 
+//				"\n" + w +
+//				"\n" + g +
+//				"\ndecoded once = " + decoded1 +
 //				"\n" + values2Array +
 //				"\n" + g2 +
-				"\n" + k +
-				"\n" + g2 +
+//				"\n" + k +
+//				"\n" + g2 +
 //				"\ndecoded two = " + 
-				"\ndecoded = " + decoded2;
+//				"\ndecoded = " + 
+				decoded2;
 	}
 
 	public String toString() {
@@ -195,7 +199,30 @@ public class Receive implements Cipher {
 //		Receive m = new Receive("xcsmmioxlwxaeehaiesx", "hello", "three", "x");
 //		System.out.println(m.decode());
 		
-		Receive t = new Receive("arrtestsitem", "tetris", "master", "x");
-		System.out.println(t.decode());
+//		Receive t = new Receive("arrtestsitem", "tetris", "master", "x");
+//		System.out.println(t.decode());
+		
+		Scanner k = new Scanner(System.in);
+		String choice = "y";
+		
+		while (choice.equalsIgnoreCase("y")) {
+			System.out.print("message : ");
+			String message = k.next();
+			
+			System.out.print("keyword one : ");
+			String kwOne = k.next();
+			
+			System.out.print("keyword two : ");
+			String kwTwo = k.next();
+			
+			System.out.print("null key : ");
+			String pad = k.next();
+			
+			Receive s = new Receive(message, kwOne, kwTwo, pad);
+			System.out.println("decryption = " + s.decode());
+			
+			System.out.println("decrypt again? ");
+			choice = k.next();
+		}
 	}
 }

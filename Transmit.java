@@ -170,13 +170,15 @@ public class Transmit implements Cipher {
 			g2 += "\n";
 		}
 		
-		return message +
-				"\n" + keywordOne +
-				"\n" + g +
-				"\nencrypted one = " + columns +
-				"\n" + keywordTwo +
-				"\n" + g2 +
-				"\nencrypted two = " + columns2;
+		return 
+//				message +
+//				"\n" + keywordOne +
+//				"\n" + g +
+//				"\nencrypted one = " + columns +
+//				"\n" + keywordTwo +
+//				"\n" + g2 +
+//				"\nencrypted = " + 
+				columns2;
 	}
 	
 	public void readFile(String fileName) {
@@ -212,8 +214,32 @@ public class Transmit implements Cipher {
 //		Transmit m = new Transmit("tetrismaster", "tetris", "master", "x");
 //		System.out.println(m.encrypt());
 		
-		Transmit d = new Transmit();
-		d.readFile("C:\\Users\\Sydney\\Documents\\School\\Junior Year\\GitHub\\Double Transposition Cipher\\src\\DTC.dat");
-		System.out.println(d.encrypt());
+//		Transmit d = new Transmit();
+////		d.readFile("C:\\Users\\Sydney\\Documents\\School\\Junior Year\\GitHub\\Double Transposition Cipher\\src\\DTC.dat");
+//		d.readFile("DTC.dat");
+//		System.out.println(d.encrypt());
+		
+		Scanner k = new Scanner(System.in);
+		String choice = "y";
+		
+		while (choice.equalsIgnoreCase("y")) {
+			System.out.print("message : ");
+			String message = k.next();
+			
+			System.out.print("keyword one : ");
+			String kwOne = k.next();
+			
+			System.out.print("keyword two : ");
+			String kwTwo = k.next();
+			
+			System.out.print("null key : ");
+			String pad = k.next();
+			
+			Transmit s = new Transmit(message, kwOne, kwTwo, pad);
+			System.out.println("encryption = " + s.encrypt());
+			
+			System.out.println("encrypt again? ");
+			choice = k.next();
+		}
 	}
 }
