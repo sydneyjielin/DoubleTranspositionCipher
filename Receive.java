@@ -107,11 +107,17 @@ public class Receive implements Cipher {
 			}
 		}
 		
+		while (decoded1.endsWith(p)) {
+			decoded1 = decoded1.substring(0, decoded1.length() - 1);
+		}
+		
+		System.out.println(decoded1);
+		
 		// DECRYPT TWO
 		String[][] grid2;
 		double rowCount2 = k.length();
 		rowCount2 = m.length() / rowCount2;
-		rowCount2 = (Math.ceil(rowCount2));
+//		rowCount2 = (Math.ceil(rowCount2));
 		
 		int rows2 = (int)rowCount2;
 		grid2 = new String[rows2][k.length()];
@@ -138,6 +144,10 @@ public class Receive implements Cipher {
 				if (tempMess2.length() > 0) {
 					grid2[n][low2] = tempMess2.substring(0, 1);
 					tempMess2 = tempMess2.substring(1, tempMess2.length());
+				}
+				
+				else {
+					grid2[n][low2] = pad;
 				}
 			}
 			
@@ -180,13 +190,13 @@ public class Receive implements Cipher {
 		return 
 //				message + 
 //				"\n" + w +
-//				"\n" + g +
-//				"\ndecoded once = " + decoded1 +
-//				"\n" + values2Array +
-//				"\n" + g2 +
-//				"\n" + k +
-//				"\n" + g2 +
-//				"\ndecoded two = " + 
+				"\n" + g +
+				"\ndecoded once = " + decoded1 +
+				"\n" + values2Array +
+				"\n" + g2 +
+				"\n" + k +
+				"\n" + g2 +
+				"\ndecoded two = " + 
 //				"\ndecoded = " + 
 				decoded2;
 	}
