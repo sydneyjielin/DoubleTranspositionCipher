@@ -112,10 +112,10 @@ public class Transmit implements Cipher {
 			g += "\n";
 		}
 		
-		//COLUMNAR TRANSPOSITION
+		//DOUBLE TRANSPOSITION
 		String[][] grid2;
 		int[] values2;
-		double lineCount2 = keywordTwo.length();		
+		double lineCount2 = keywordTwo.length();
 		lineCount2 = columns.length() / lineCount2;
 		lineCount2 = Math.ceil(lineCount2);
 		
@@ -166,7 +166,6 @@ public class Transmit implements Cipher {
 		for (int r = 0; r < grid2.length; r++) {
 			for (int c = 0; c < grid2[r].length; c++)
 				g2 += grid2[r][c] + " ";
-			
 			g2 += "\n";
 		}
 		
@@ -211,13 +210,11 @@ public class Transmit implements Cipher {
 	}
 
 	public static void main(String argv[]) {
-//		Transmit m = new Transmit("tetrismaster", "tetris", "master", "x");
-//		System.out.println(m.encrypt());
+		Transmit m = new Transmit("michaelisawesome", "hello", "three", "x");
+		System.out.println(m.encrypt());
 		
-//		Transmit d = new Transmit();
-////		d.readFile("C:\\Users\\Sydney\\Documents\\School\\Junior Year\\GitHub\\Double Transposition Cipher\\src\\DTC.dat");
-//		d.readFile("DTC.dat");
-//		System.out.println(d.encrypt());
+		Transmit t = new Transmit("tetrismaster", "tetris", "master", "x");
+		System.out.println(t.encrypt());
 		
 		Scanner k = new Scanner(System.in);
 		String choice = "y";

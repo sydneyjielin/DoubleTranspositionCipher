@@ -41,11 +41,11 @@ public class Receive implements Cipher {
 		pad = p;
 	}
 	
-	public String decode() {
-		return decode(message, keywordOne, keywordTwo, pad);
+	public String decrypt() {
+		return decrypt(message, keywordOne, keywordTwo, pad);
 	}
 
-	public String decode(String m, String k, String w, String p) {
+	public String decrypt(String m, String k, String w, String p) {
 		String[][] grid;
 		double rowCount = w.length();
 		rowCount = m.length() / rowCount;
@@ -107,16 +107,19 @@ public class Receive implements Cipher {
 			}
 		}
 		
-		while (decoded1.endsWith(p)) {
-			decoded1 = decoded1.substring(0, decoded1.length() - 1);
-		}
+		String padding = "";
+		for (int i = 0; i < grid.length; i++)
+			padding += pad;
 		
-		System.out.println(decoded1);
+		if (decoded1.substring(decoded1.length() - padding.length(), decoded1.length()).equals(padding))
+			decoded1 = decoded1.substring(0, decoded1.length() - padding.length());
+		
+//		System.out.println(decoded1);
 		
 		// DECRYPT TWO
 		String[][] grid2;
 		double rowCount2 = k.length();
-		rowCount2 = m.length() / rowCount2;
+		rowCount2 = decoded1.length() / rowCount2;
 //		rowCount2 = (Math.ceil(rowCount2));
 		
 		int rows2 = (int)rowCount2;
@@ -190,27 +193,27 @@ public class Receive implements Cipher {
 		return 
 //				message + 
 //				"\n" + w +
-				"\n" + g +
-				"\ndecoded once = " + decoded1 +
-				"\n" + values2Array +
-				"\n" + g2 +
-				"\n" + k +
-				"\n" + g2 +
-				"\ndecoded two = " + 
+//				"\n" + g +
+//				"\ndecoded once = " + decoded1 +
+//				"\n" + values2Array +
+//				"\n" + g2 +
+//				"\n" + k +
+//				"\n" + g2 +
+//				"\ndecoded two = " + 
 //				"\ndecoded = " + 
 				decoded2;
 	}
 
 	public String toString() {
-		return "message : " + message + "\nkeyword one : " + keywordOne + "\nkeyword two : " + keywordTwo + "\ndecryption : " + decode();
+		return "message : " + message + "\nkeyword one : " + keywordOne + "\nkeyword two : " + keywordTwo + "\ndecryption : " + decrypt();
 	}
 	
 	public static void main(String argv[]) {
-//		Receive m = new Receive("xcsmmioxlwxaeehaiesx", "hello", "three", "x");
-//		System.out.println(m.decode());
+		Receive m = new Receive("xcsmmioxlwxaeehaiesx", "hello", "three", "x");
+		System.out.println(m.decrypt());
 		
-//		Receive t = new Receive("arrtestsitem", "tetris", "master", "x");
-//		System.out.println(t.decode());
+		Receive t = new Receive("arrtestsitem", "tetris", "master", "x");
+		System.out.println(t.decrypt());
 		
 		Scanner k = new Scanner(System.in);
 		String choice = "y";
@@ -229,7 +232,7 @@ public class Receive implements Cipher {
 			String pad = k.next();
 			
 			Receive s = new Receive(message, kwOne, kwTwo, pad);
-			System.out.println("decryption = " + s.decode());
+			System.out.println("decryption = " + s.decrypt());
 			
 			System.out.println("decrypt again? ");
 			choice = k.next();
